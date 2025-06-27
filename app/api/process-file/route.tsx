@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+import { hasReachedUploadLimit } from "@/utils/hasReachedUploadLimit";
+//import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export async function POST(request: Request) {
 
@@ -7,16 +11,17 @@ export async function POST(request: Request) {
     apiKey: process.env.OPENAI_API_KEY,
   })
 
-  const body = await request.json();
-  const { fileContents } = body;
 
-  if (!fileContents) {
-    return NextResponse.json({ error: "File contents are required" }, { status: 400 });
-  }
+  console.log(request);
+  console.log(request.body);
+  const body = await request.json();
+  const fileContents = body.file; // Assuming fileContents is passed in the request body
+
 
   try {
+
     const response = await client.chat.completions.create({
-      model: "gpt-4", // Use "gpt-3.5-turbo" if you don't have access to GPT-4
+      model: "gpt-3.5-turbo", // Use "gpt-3.5-turbo" if you don't have access to GPT-4
       messages: [
         { role: "system", content: "Find something funny about this text and tell me." },
         { role: "user", content: fileContents },

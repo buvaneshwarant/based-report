@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+import { linkUserProfile } from "@/components/link-user-profiles";
 import {
   Card,
   CardContent,
@@ -20,6 +21,7 @@ export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const [tier, setTier] = useState("Free");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -40,7 +42,7 @@ export function SignUpForm({
     }
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -48,6 +50,11 @@ export function SignUpForm({
         },
       });
       if (error) throw error;
+
+      const userId = data.user?.id;
+      if (userId) {
+        await linkUserProfile(email, userId, tier);
+      }
       router.push("/auth/sign-up-success");
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
@@ -101,6 +108,15 @@ export function SignUpForm({
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
               </div>
+              <select
+                value={tier}
+                onChange={(e) => setTier(e.target.value)}
+                className="border p-2"
+              >
+                <option value="Free">Free</option>
+                <option value="Pro">Pro</option>
+                <option value="Ultimate">Ultimate</option>
+            </select>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Creating an account..." : "Sign up"}

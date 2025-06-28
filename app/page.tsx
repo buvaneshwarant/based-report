@@ -1,80 +1,240 @@
-import { DeployButton } from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { AuthButton } from "@/components/auth-button";
-import { Hero } from "@/components/hero";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/lib/utils";
+// import { Button } from "@/components/ui/button";
+// import { Sparkles, Flame, Laugh, Upload } from "lucide-react";
+// import Link from "next/link";
+
+// export default function LandingPage() {
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-yellow-100 to-blue-100 animate-gradient px-6 py-10">
+//       {/* Navbar */}
+//       <nav className="flex justify-between items-center max-w-7xl mx-auto mb-10">
+//         <div className="text-3xl font-extrabold text-rose-600 tracking-tight">
+//           Based Report
+//         </div>
+//         <div className="space-x-6 text-lg font-medium">
+//           <Link href="#features" className="hover:text-rose-500">Features</Link>
+//           <Link href="#reviews" className="hover:text-rose-500">Reviews</Link>
+//           <Link href="/analyze">
+//             <Button className="rounded-full bg-rose-600 hover:bg-rose-700 text-white px-6 py-2">
+//               Try Now
+//             </Button>
+//           </Link>
+//         </div>
+//       </nav>
+
+//       {/* Hero */}
+//       <div className="text-center max-w-4xl mx-auto">
+//         <h1 className="text-6xl font-black text-gray-900 leading-tight mb-4">
+//           🔥 Roast Yourself & Your Friends
+//         </h1>
+//         <p className="text-2xl text-gray-700 mb-8">
+//           Upload your group chat. Let our AI spill the tea, drop the jokes, and uncover the chaos.
+//         </p>
+//         <Link href="/analyze">
+//           <Button className="text-lg px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-xl hover:scale-105 transition">
+//             <Upload className="mr-2" /> Upload Chat Now
+//           </Button>
+//         </Link>
+//       </div>
+
+//       {/* Features */}
+//       <div id="features" className="max-w-6xl mx-auto mt-24 grid md:grid-cols-3 gap-10">
+//         <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition">
+//           <Flame className="text-red-500 w-10 h-10 mb-4" />
+//           <h3 className="text-xl font-bold mb-2">Who's the Main Character?</h3>
+//           <p className="text-gray-600">
+//             See who's the loudest, the ghost, or the drama king/queen in your group chat.
+//           </p>
+//         </div>
+//         <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition">
+//           <Laugh className="text-yellow-500 w-10 h-10 mb-4" />
+//           <h3 className="text-xl font-bold mb-2">Funniest Messages</h3>
+//           <p className="text-gray-600">
+//             We find and highlight the most unhinged, laugh-out-loud texts you've all forgotten.
+//           </p>
+//         </div>
+//         <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition">
+//           <Sparkles className="text-purple-500 w-10 h-10 mb-4" />
+//           <h3 className="text-xl font-bold mb-2">Mood & Vibes</h3>
+//           <p className="text-gray-600">
+//             Analyze sentiment over time—discover love, beef, dead chats, and group glow-ups.
+//           </p>
+//         </div>
+//       </div>
+
+//       {/* Reviews */}
+//       <div id="reviews" className="max-w-4xl mx-auto mt-28 text-center">
+//         <h2 className="text-4xl font-extrabold mb-6">What People Are Saying</h2>
+//         <div className="grid md:grid-cols-2 gap-8">
+//           <div className="bg-white rounded-2xl shadow-md p-6 text-left">
+//             <p className="italic text-gray-700 mb-2">
+//               "This exposed my group chat in the funniest way. I found out I'm the villain 😂."
+//             </p>
+//             <p className="text-sm font-semibold text-rose-600">— Alex D.</p>
+//           </div>
+//           <div className="bg-white rounded-2xl shadow-md p-6 text-left">
+//             <p className="italic text-gray-700 mb-2">
+//               "We uploaded our college chat. AI called out the simp, the ghoster, and the drama queen. Spot on."
+//             </p>
+//             <p className="text-sm font-semibold text-rose-600">— Jamie L.</p>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* CTA Footer */}
+//       <div className="mt-32 text-center">
+//         <p className="text-xl font-semibold text-gray-800 mb-6">
+//           Ready to see your chat in a whole new (hilarious) light?
+//         </p>
+//         <Link href="/analyze">
+//           <Button className="px-10 py-4 text-lg rounded-full bg-rose-600 hover:bg-rose-700 text-white shadow-lg">
+//             Roast My Group Chat
+//           </Button>
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// }
+
+import { Button } from "@/components/ui/button";
+import { Flame, Laugh, Sparkles, Upload, Mail, CreditCard } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-export default function PricingPage() {
+
+export default function LandingPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center bg-white text-black">
-      <header className="w-full bg-gray-100 py-6">
-        <div className="max-w-5xl mx-auto flex justify-between items-center px-6">
-          <h1 className="text-3xl font-bold">Based Report</h1>
-          <nav className="flex gap-6">
-            <AuthButton />
-          </nav>
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-yellow-100 to-blue-100 animate-gradient px-6 py-10">
+      {/* Navbar */}
+      <nav className="flex justify-between items-center max-w-7xl mx-auto mb-10">
+        <div className="text-3xl font-extrabold text-rose-600 tracking-tight">
+          Based Report
         </div>
-      </header>
+        <div className="space-x-6 text-lg font-medium">
+          <Link href="#features" className="hover:text-rose-500">Features</Link>
+          <Link href="#pricing" className="hover:text-rose-500">Pricing</Link>
+          <Link href="#reviews" className="hover:text-rose-500">Reviews</Link>
+        </div>
+      </nav>
 
-      <section id="hero" className="flex flex-col items-center text-center py-20 px-6">
-        <h2 className="text-4xl font-bold mb-4">Roast Yourself and Your Friends</h2>
-        <p className="text-lg max-w-2xl">
-          Based Report doesn’t pull out - just the truth, hard, honest, and totally unfiltered.
+      {/* Hero */}
+      <div className="text-center max-w-4xl mx-auto">
+        <h1 className="text-6xl font-black text-gray-900 leading-tight mb-4">
+          🔥 Roast Yourself & Your Friends
+        </h1>
+        <p className="text-2xl text-gray-700 mb-8">
+          Upload your group chat. Let our AI spill the tea, drop the jokes, and uncover the chaos.
         </p>
-        {/* Make sure gigachad.png is in the /public directory */}
-        <img
-          src="/gigachad.png"
-          width={500}
-          height={300}
-          className="rounded-lg shadow-lg"
-          alt="Gigachad"
-        />
-      </section>
+        <a href="#pricing">
+          <Button className="text-lg px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-xl hover:scale-105 transition">
+            <Upload className="mr-2" /> Get Started
+          </Button>
+        </a>
+      </div>
 
-      <section id="pricing" className="w-full bg-gray-100 py-20">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Pricing</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gray-200 p-6 rounded">
-              <h3 className="text-xl font-bold mb-4">Free</h3>
-              <p className="mb-4">Get a taste of the roast for free.</p>
-              <p className="text-lg font-bold">$0/month</p>
-            </div>
-            <div className="bg-gray-200 p-6 rounded">
-              <h3 className="text-xl font-bold mb-4">Pro</h3>
-              <p className="mb-4">Unlimited roasts and deeper insights.</p>
-              <p className="text-lg font-bold">$10/month</p>
-            </div>
-            <div className="bg-gray-200 p-6 rounded">
-              <h3 className="text-xl font-bold mb-4">Ultimate</h3>
-              <p className="mb-4">Roast your entire friend group and get advanced analytics.</p>
-              <p className="text-lg font-bold">$25/month</p>
-            </div>
+      {/* Features */}
+      <div id="features" className="max-w-6xl mx-auto mt-24 grid md:grid-cols-3 gap-10">
+        <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition">
+          <Flame className="text-red-500 w-10 h-10 mb-4" />
+          <h3 className="text-xl font-bold mb-2">Who's the Main Character?</h3>
+          <p className="text-gray-600">
+            See who's the loudest, the ghost, or the drama king/queen in your group chat.
+          </p>
+        </div>
+        <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition">
+          <Laugh className="text-yellow-500 w-10 h-10 mb-4" />
+          <h3 className="text-xl font-bold mb-2">Funniest Messages</h3>
+          <p className="text-gray-600">
+            We find and highlight the most unhinged, laugh-out-loud texts you've all forgotten.
+          </p>
+        </div>
+        <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition">
+          <Sparkles className="text-purple-500 w-10 h-10 mb-4" />
+          <h3 className="text-xl font-bold mb-2">Mood & Vibes</h3>
+          <p className="text-gray-600">
+            Analyze sentiment over time—discover love, beef, dead chats, and group glow-ups.
+          </p>
+        </div>
+      </div>
+
+      {/* Pricing Plans */}
+      <div id="pricing" className="max-w-5xl mx-auto mt-32 text-center">
+        <h2 className="text-4xl font-extrabold mb-6">Choose Your Roast Level</h2>
+        <div className="grid md:grid-cols-3 gap-8 mt-10">
+          {/* Basic Plan */}
+          <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition border border-rose-200">
+            <h3 className="text-2xl font-bold text-rose-600 mb-2">Roast Me Light</h3>
+            <p className="text-gray-600 mb-4">For solo chats or a curious first burn 🔥</p>
+            <p className="text-3xl font-bold mb-4">$5</p>
+            <ul className="text-gray-600 mb-6 space-y-1">
+              <li>✔ 1 Chat Upload</li>
+              <li>✔ Email Report</li>
+              <li>✔ AI Roast & Graphs</li>
+            </ul>
+            <a href="/analyze">
+              <Button className="w-full rounded-full bg-rose-600 text-white">Choose Plan</Button>
+            </a>
+          </div>
+
+          {/* Plus Plan */}
+          <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition border border-yellow-300">
+            <h3 className="text-2xl font-bold text-yellow-600 mb-2">Meme Overload</h3>
+            <p className="text-gray-600 mb-4">For couples, roommates, group clowns 😂</p>
+            <p className="text-3xl font-bold mb-4">$12</p>
+            <ul className="text-gray-600 mb-6 space-y-1">
+              <li>✔ 3 Chat Uploads</li>
+              <li>✔ Priority Email Delivery</li>
+              <li>✔ Extra Insight Layers</li>
+            </ul>
+            <a href="/analyze">
+              <Button className="w-full rounded-full bg-yellow-500 text-white">Choose Plan</Button>
+            </a>
+          </div>
+
+          {/* Pro Plan */}
+          <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition border border-purple-300">
+            <h3 className="text-2xl font-bold text-purple-600 mb-2">Group Chat God</h3>
+            <p className="text-gray-600 mb-4">For influencers, large friend groups, or chaotic genius 👑</p>
+            <p className="text-3xl font-bold mb-4">$25</p>
+            <ul className="text-gray-600 mb-6 space-y-1">
+              <li>✔ 10 Chat Uploads</li>
+              <li>✔ VIP Processing</li>
+              <li>✔ Custom Meme Report</li>
+            </ul>
+            <a href="/analyze">
+              <Button className="w-full rounded-full bg-purple-600 text-white">Choose Plan</Button>
+            </a>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="features" className="py-20 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Features</h2>
-          <ul className="list-disc list-inside text-left mx-auto max-w-3xl">
-            <li className="mb-4">Personalized roasts tailored to your personality.</li>
-            <li className="mb-4">Roast your friends and see what they're all about.</li>
-            <li className="mb-4">Advanced analytics to see how you rank among your peers.</li>
-            <li className="mb-4">Share your roasts on social media for maximum laughs.</li>
-          </ul>
+      {/* Reviews */}
+      <div id="reviews" className="max-w-4xl mx-auto mt-28 text-center">
+        <h2 className="text-4xl font-extrabold mb-6">What People Are Saying</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white rounded-2xl shadow-md p-6 text-left">
+            <p className="italic text-gray-700 mb-2">
+              "This exposed my group chat in the funniest way. I found out I'm the villain 😂."
+            </p>
+            <p className="text-sm font-semibold text-rose-600">— Alex D.</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-md p-6 text-left">
+            <p className="italic text-gray-700 mb-2">
+              "We uploaded our college chat. AI called out the simp, the ghoster, and the drama queen. Spot on."
+            </p>
+            <p className="text-sm font-semibold text-rose-600">— Jamie L.</p>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <footer className="w-full bg-gray-100 py-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-sm">&copy; 2025 Based Report. All rights reserved.</p>
-        </div>
-      </footer>
-    </main>
+      {/* CTA Footer */}
+      <div className="mt-32 text-center">
+        <p className="text-xl font-semibold text-gray-800 mb-6">
+          Ready to upload and unleash the roast?
+        </p>
+        <Link href="/analyze">
+          <Button className="px-10 py-4 text-lg rounded-full bg-rose-600 hover:bg-rose-700 text-white shadow-lg">
+            <Mail className="mr-2" /> Email Me The Report
+          </Button>
+        </Link>
+      </div>
+    </div>
   );
 }

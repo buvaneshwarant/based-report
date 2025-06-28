@@ -1,11 +1,11 @@
-
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-export default function ViewDetailsPage() {
+function ViewDetailsPageContent() {
   const searchParams = useSearchParams();
   const fileId = searchParams.get("id");
   const [fileDetails, setFileDetails] = useState<any>(null);
@@ -61,3 +61,10 @@ export default function ViewDetailsPage() {
   );
 }
 
+export default function PrevUploadPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <ViewDetailsPageContent />
+    </Suspense>
+  );
+}

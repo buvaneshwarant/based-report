@@ -1,9 +1,5 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import { hasReachedUploadLimit } from "@/utils/hasReachedUploadLimit";
-//import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 
 export async function POST(request: Request) {
 

@@ -204,7 +204,11 @@ export default function ProtectedPage() {
         setPreviousUploads(filesData || []);
       }
     } catch (err) {
-      setUploadStatus(`An error occurred: ${err.message}`);
+      if (err instanceof Error) {
+        setUploadStatus(`An error occurred: ${err.message}`);
+      } else {
+        setUploadStatus("An unknown error occurred.");
+      }
     }
   };
 
@@ -223,9 +227,9 @@ export default function ProtectedPage() {
               <div key={upload.id} className="border p-4 rounded bg-gray-100 hover:bg-gray-200">
                 <p className="font-bold">File Name: {upload.name}</p>
                 <p>Uploaded At: {new Date(upload.created_at).toLocaleString()}</p>
-<Link href={`/protected/prev_upload?id=${upload.id}`} className="text-blue-500 underline">
-  View Details
-</Link>
+                <Link href={`/prev_upload?id=${upload.id}`} className="text-blue-500 underline">
+                  View Details
+                </Link>
                 {upload.report_url && (
                   <a
                     href={`https://jknlwrzslnrkzfeuintd.supabase.co/storage/v1/object/public/uploads/${upload.report_url}`} // Replace `your-supabase-url` with your actual Supabase URL

@@ -7,6 +7,7 @@ import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-ste
 import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
 import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 export default function PricingPage() {
   return (
     <main className="min-h-screen flex flex-col items-center bg-white text-black">
@@ -14,8 +15,6 @@ export default function PricingPage() {
         <div className="max-w-5xl mx-auto flex justify-between items-center px-6">
           <h1 className="text-3xl font-bold">Based Report</h1>
           <nav className="flex gap-6">
-            <a href="#pricing" className="hover:text-gray-600">Pricing</a>
-            <a href="#features" className="hover:text-gray-600">Features</a>
             <AuthButton />
           </nav>
         </div>
@@ -24,9 +23,16 @@ export default function PricingPage() {
       <section id="hero" className="flex flex-col items-center text-center py-20 px-6">
         <h2 className="text-4xl font-bold mb-4">Roast Yourself and Your Friends</h2>
         <p className="text-lg max-w-2xl">
-          Ever wondered what people really think about you? Or want to see your friends roasted in the most hilarious way possible? 
-          Based Report is here to deliver the truth—raw, funny, and brutally honest.
+          Based Report doesn’t pull out - just the truth, hard, honest, and totally unfiltered.
         </p>
+        {/* Make sure gigachad.png is in the /public directory */}
+        <img
+          src="/gigachad.png"
+          width={500}
+          height={300}
+          className="rounded-lg shadow-lg"
+          alt="Gigachad"
+        />
       </section>
 
       <section id="pricing" className="w-full bg-gray-100 py-20">

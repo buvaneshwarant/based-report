@@ -15,21 +15,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const priceLookup: Record<string, string> = {
-      basic: "1",
-      plus: "2",
-      pro: "3",
-    };
-
-    const priceId = priceLookup[plan];
-
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: [
         {
-          price: "price_1Rf43TQpFMJ6p7gscFWd2xk8",
+          price: "price_1Rf42vQpFMJ6p7gsKWen8Yxf",
           quantity: 1,
         },
       ],
@@ -41,7 +32,6 @@ export async function POST(req: NextRequest) {
       success_url: `${BASE_URL}/upload?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${BASE_URL}/cancel`,
     });
-
 
     return NextResponse.json({ url: session.url });
   } catch (err) {

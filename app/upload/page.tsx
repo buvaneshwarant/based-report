@@ -42,6 +42,18 @@ export default function FileSelectionCard() {
     setError(null);
 
     try {
+      // pre step
+      // Step 1: Record payment to DB
+      await fetch("/api/record-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId,
+          email,
+          status: "paid"
+        })
+      });
+
       // Step 1: Get signed URL
       const presignRes = await fetch("/api/presign", {
         method: "POST",
@@ -58,6 +70,18 @@ export default function FileSelectionCard() {
         body: file
       });
 
+      // Step 3: Save upload info to DB
+      await fetch("/api/record-upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId,
+          email,
+          filePath: `uploads/${sessionId}/${file.name}`,
+          status: "uploaded"
+        })
+      });
+
       // Step 3: Trigger processing
       await fetch("/api/process", {
         method: "POST",
@@ -69,7 +93,20 @@ export default function FileSelectionCard() {
         })
       });
 
+      // Step 6: Mark upload complete and delete file
+      await fetch("/api/complete-upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId,
+          filePath: `uploads/${sessionId}/${file.name}`
+        })
+      });
+
       setUploadComplete(true);
+      // pause for a bit before redirecting
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Step 4: Redirect to thank you page
       router.push("/thank-you");
     } catch (err) {
       console.error(err);
@@ -138,7 +175,7 @@ export default function FileSelectionCard() {
         <p className="mt-6 text-sm text-gray-500">
           Logged in as <span className="text-blue-600 font-medium">Anonymous</span> ・
           <span className="ml-1 inline-block px-2 py-0.5 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold">
-            0 REPORTS REMAINING
+            1 REPORTS REMAINING
           </span>
         </p>
       </div>

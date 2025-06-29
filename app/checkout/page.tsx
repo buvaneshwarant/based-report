@@ -87,15 +87,12 @@ export default function FileSelectionCard() {
             className="w-full text-lg py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-blue-500 text-white shadow hover:from-indigo-600 hover:to-blue-600"
             type="button"
           >
-            {loading ? "Redirecting..." : "Generate for $7"}
+            {loading ? "Redirecting..." : "Generate for $1"}
           </Button>
         </div>
 
         <p className="mt-6 text-sm text-gray-500">
-          Logged in as <span className="text-blue-600 font-medium">Anonymous</span> ・
-          <span className="ml-1 inline-block px-2 py-0.5 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold">
-            0 REPORTS REMAINING
-          </span>
+          Logged in as <span className="text-blue-600 font-medium">Anonymous</span>
         </p>
       </div>
     </div>

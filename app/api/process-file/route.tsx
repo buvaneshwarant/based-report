@@ -7,12 +7,10 @@ export async function POST(request: Request) {
     apiKey: process.env.OPENAI_API_KEY,
   })
 
-
   console.log(request);
   console.log(request.body);
   const body = await request.json();
   const fileContents = body.file; // Assuming fileContents is passed in the request body
-
 
   try {
 

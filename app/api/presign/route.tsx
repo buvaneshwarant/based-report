@@ -19,9 +19,5 @@ export async function POST(req: NextRequest) {
     .from('uploads')
     .createSignedUploadUrl(path);
 
-//     console.log('🔗 Supabase signedUploadUrl:', data);
-
-//   console.log('✅ Supabase signedUploadUrl:', data?.signedUrl);
-
   return NextResponse.json({ url: data?.signedUrl }, { status: 200 });
 }
